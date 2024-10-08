@@ -40,23 +40,33 @@
 	</div>
 	<p><b>Abstract:</b>
 <!--		We introduce FunAudioLLM, ....-->
-Recently, the generated speech under zero-shot conditions has progressively approached the realism of target speakers' recordings, yet multimodal voice creation remains an evolving field. In various scenarios, people often seek to control and create voice characteristics through different voice description modalities. This paper introduces UniSpeaker, a unified multimodal-driven voice for speech generation model that incorporates face images, text descriptions, attribute descriptions, and reference speech for voice control and creation. To address the modality deficiencies and limitations of previous generation approaches, we are the first to integrate multimodal voice control into a large-scale speech generation framework, employing self-distillation for enhanced voice disentanglement. Additionally, we introduce a unified voice aggregator based on KV-Former and apply soft contrastive loss, mapping various voice description modalities into a shared voice space, resulting in the generated voice being more aligned with the input voice descriptions. We evaluated UniSpeaker across 5 multimodal voice control tasks, and the experimental results demonstrate that UniSpeaker outperforms previous modality-specific models, producing multimodal-driven speech with superior voice appropriateness and speech quality. 
+Recent advancements in zero-shot speech personalized generation have brought synthetic speech increasingly close to the realism of target speakers' recordings, yet multimodal voice creation remains on the rise. In various scenarios, individuals often seek to control and create voice characteristics through different voice description modalities. To address the limitations in both the versatility and performance of voice control found in previous methods, this paper introduces UniSpeaker, a unified multimodality-driven speech generation model that integrates face images, text descriptions, voice attribute descriptions, and reference speech for comprehensive voice control and creation. Specifically, we propose a unified voice aggregator based on KV-Former, applying soft contrastive loss to map diverse voice description modalities into a shared voice space, ensuring that the generated voice aligns more closely with the input descriptions. In addition, multimodal voice control is incorporated within a large-scale speech generation framework, employing self-distillation to enhance voice disentanglement. To evaluate multimodality-driven voice control, we build the first multimodality-based voice control (MVC) benchmark, focusing on voice suitability, voice diversity, and speech quality. UniSpeaker is evaluated across five tasks using the MVC benchmark, and the experimental results demonstrate that UniSpeaker outperforms previous modality-specific models.
 	<p style="text-align: center;">
 		<img src="pics/fig1.jpg" height="400" width="1024">
 	</p>
-</p>
-	</p>
+
 
 	<p>
-	<b>Contents</b>
+	<b>Experiment</b>
       <ul>
       	<li><a href="#FaceTTS">Face-Driven Personalized Text-to-Speech</a>
 		<li><a href="#FaceVC">Face-Driven Voice Conversion</a>
 		<li><a href="#TextTTS">Text Description-Driven Personalized Text-to-Speech</a>
 		<li><a href="#TextVC">Text Description-Driven Voice Conversion</a>
 		<li><a href="#AVE">Attribute-Driven Voice Editing</a>
+		</ul>
 	</p>
 
+   <p>
+   <b>Discussion</b>
+      <ul>
+	    <li><a href="#FaceConsistency">Face-Driven Voice Consistency</a>
+		<li><a href="#FaceDiversity">More Face-Driven Voice Samples</a>
+		<li><a href="#TextDiversity">More Text-Driven Voice Samples</a>
+		<li><a href="#FaceText">Joint Face and Text-driven Voice Samples</a>
+		<li><a href="#FaceAttribute">Joint Face and Attribute-driven Voice Samples</a>
+	 </ul>
+	</p>
 </div>
 
 <!------ Application -------------------------->
@@ -80,14 +90,14 @@ Recently, the generated speech under zero-shot conditions has progressively appr
 				<tbody>
 					<tr>
 						<td>It impacts sentencing. </td>
-						<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts/ClfBxWPkBKU_73.jpg" alt="" width="150" height="150"></audio><br></td>
+						<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts/ClfBxWPkBKU_73.jpg" alt="" width="150" height="150"><br></td>
 						<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/facetts/ClfBxWPkBKU_73_prompt.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 						<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/facetts/ClfBxWPkBKU_73_baseline.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 						<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/facetts/ClfBxWPkBKU_73.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 					</tr>
 					<tr>
 						<td>She found us we found her disease.</td>
-						<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts/gSycQufrgK4_26.jpg" alt="" width="150" height="150"></audio><br></td>
+						<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts/gSycQufrgK4_26.jpg" alt="" width="150" height="150"><br></td>
 						<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/facetts/gSycQufrgK4_26_prompt.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 						<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/facetts/gSycQufrgK4_26_baseline.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 						<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/facetts/gSycQufrgK4_26.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
@@ -102,7 +112,7 @@ Recently, the generated speech under zero-shot conditions has progressively appr
 					</tr>
 					<tr>
 						<td>They were unexpected pleasures.</td>
-						<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts/t7Xr3AsBEK4_17.jpg" alt="" width="150" height="150"></audio><br></td>
+						<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts/t7Xr3AsBEK4_17.jpg" alt="" width="150" height="150"><br></td>
 						<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/facetts/t7Xr3AsBEK4_17_prompt.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 						<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/facetts/t7Xr3AsBEK4_17_baseline.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 						<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/facetts/t7Xr3AsBEK4_17.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
@@ -110,14 +120,14 @@ Recently, the generated speech under zero-shot conditions has progressively appr
 					</tr>
 					<tr>
 						<td>Look at the end to see the animal.</td>
-						<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts/4Q2aznfmcYU_50.jpg" alt="" width="150" height="150"></audio><br></td>
+						<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts/4Q2aznfmcYU_50.jpg" alt="" width="150" height="150"><br></td>
 						<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/facetts/4Q2aznfmcYU_50_prompt.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 						<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/facetts/4Q2aznfmcYU_50_baseline.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 						<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/facetts/4Q2aznfmcYU_50.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 					</tr>
 					<tr>
 						<td>We were so excited.</td>
-						<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts/8vNIrPeRGlM_99.jpg" alt="" width="150" height="150"></audio><br></td>
+						<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts/8vNIrPeRGlM_99.jpg" alt="" width="150" height="150"><br></td>
 						<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/facetts/8vNIrPeRGlM_99_prompt.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 						<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/facetts/8vNIrPeRGlM_99_baseline.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 						<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/facetts/8vNIrPeRGlM_99.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
@@ -147,21 +157,21 @@ Recently, the generated speech under zero-shot conditions has progressively appr
 			<tbody>
 				<tr>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/iqEHuBST2qQ_3_0_src.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
-					<td style="vertical-align : middle;text-align:center;"><img src="audio/facevc/iqEHuBST2qQ_3_0.jpg" alt="" width="150" height="150"></audio><br></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facevc/iqEHuBST2qQ_3_0.jpg" alt="" width="150" height="150"><br></td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/iqEHuBST2qQ_3_0_prompt.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/iqEHuBST2qQ_3_0_gen.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/iqEHuBST2qQ_3_0.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 				</tr>
 				<tr>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/eNAHVnkll5M_9_0_src.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
-					<td style="vertical-align : middle;text-align:center;"><img src="audio/facevc/eNAHVnkll5M_9_0.jpg" alt="" width="150" height="150"></audio><br></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facevc/eNAHVnkll5M_9_0.jpg" alt="" width="150" height="150"><br></td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/eNAHVnkll5M_9_0_prompt.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/eNAHVnkll5M_9_0_gen.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/eNAHVnkll5M_9_0.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 				</tr>
 				<tr>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/hiIcwt88o94_4_2_src.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
-					<td style="vertical-align : middle;text-align:center;"><img src="audio/facevc/hiIcwt88o94_4_2.jpg" alt="" width="150" height="150"></audio><br></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facevc/hiIcwt88o94_4_2.jpg" alt="" width="150" height="150"><br></td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/hiIcwt88o94_4_2_prompt.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/hiIcwt88o94_4_2_gen.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/hiIcwt88o94_4_2.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
@@ -169,21 +179,21 @@ Recently, the generated speech under zero-shot conditions has progressively appr
 
 				<tr>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/CgNx9Bgac1I_23_0_src.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
-					<td style="vertical-align : middle;text-align:center;"><img src="audio/facevc/CgNx9Bgac1I_23_0.jpg" alt="" width="150" height="150"></audio><br></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facevc/CgNx9Bgac1I_23_0.jpg" alt="" width="150" height="150"><br></td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/CgNx9Bgac1I_23_0_prompt.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/CgNx9Bgac1I_23_0_gen.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/CgNx9Bgac1I_23_0.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 				</tr>
 				<tr>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/gtpTd3ywwiE_16_0_src.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
-					<td style="vertical-align : middle;text-align:center;"><img src="audio/facevc/gtpTd3ywwiE_16_0.jpg" alt="" width="150" height="150"></audio><br></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facevc/gtpTd3ywwiE_16_0.jpg" alt="" width="150" height="150"><br></td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/gtpTd3ywwiE_16_0_prompt.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/gtpTd3ywwiE_16_0_gen.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/gtpTd3ywwiE_16_0.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 				</tr>
 				<tr>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/gVfgkFaswn4_80_0_src.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
-					<td style="vertical-align : middle;text-align:center;"><img src="audio/facevc/gVfgkFaswn4_80_0.jpg" alt="" width="150" height="150"></audio><br></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facevc/gVfgkFaswn4_80_0.jpg" alt="" width="150" height="150"><br></td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/gVfgkFaswn4_80_0_prompt.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/gVfgkFaswn4_80_0_gen.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
 					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 215px;"><source src="audio/facevc/gVfgkFaswn4_80_0.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
@@ -384,6 +394,182 @@ Recently, the generated speech under zero-shot conditions has progressively appr
 
 
 
+<div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded">
+	<h2 id="FaceConsistency" style="text-align: center;">Face-Driven Voice Consistency</h2>
+	<p> </p>
+		<div class="table-responsive pt-3">
+			<table class="table table-hover pt-2" style="width: 100%; border-collapse: collapse;">
+			<thead>
+				<tr>
+					<th style="vertical-align : middle;text-align: center">Face Image1</th>
+					<th style="vertical-align : middle;text-align: center">Face Image2</th>
+					<th style="vertical-align : middle;text-align: center">Face Image3</th>
+					<th style="vertical-align : middle;text-align: center">Face Image4</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_consist/4Q2aznfmcYU_0.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_consist/4Q2aznfmcYU_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_consist/4Q2aznfmcYU_44.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_consist/4Q2aznfmcYU_44.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_consist/4Q2aznfmcYU_55.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_consist/4Q2aznfmcYU_55.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_consist/4Q2aznfmcYU_25.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_consist/4Q2aznfmcYU_25.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_consist/5b5BDoddOLA_12.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_consist/5b5BDoddOLA_12.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_consist/5b5BDoddOLA_20.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_consist/5b5BDoddOLA_20.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_consist/5b5BDoddOLA_36.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_consist/5b5BDoddOLA_36.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_consist/5b5BDoddOLA_56.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_consist/5b5BDoddOLA_56.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_consist/H14bBuluwB8_11.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_consist/H14bBuluwB8_11.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_consist/H14bBuluwB8_14.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_consist/H14bBuluwB8_14.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_consist/H14bBuluwB8_16.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_consist/H14bBuluwB8_16.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_consist/H14bBuluwB8_99.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_consist/H14bBuluwB8_99.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+</div>
+
+
+<div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded">
+	<h2 id="FaceDiversity" style="text-align: center;">More Face-Driven Voice Control Samples</h2>
+	<p> </p>
+		<div class="table-responsive pt-3">
+			<table class="table table-hover pt-2" style="width: 100%; border-collapse: collapse;">
+			<thead>
+				<tr>
+					<th style="vertical-align : middle;text-align: center">Face Image1</th>
+					<th style="vertical-align : middle;text-align: center">Face Image2</th>
+					<th style="vertical-align : middle;text-align: center">Face Image3</th>
+					<th style="vertical-align : middle;text-align: center">Face Image4 (Out of Domain)</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_diversity/2UStOghblfE_60.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_diversity/2UStOghblfE_60.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_diversity/5riPKdpuoiI_3.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_diversity/5riPKdpuoiI_3.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_diversity/6Waurx8eS1o_61.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_diversity/6Waurx8eS1o_61.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_diversity/GSf6nijSSdA_94_1.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_diversity/GSf6nijSSdA_94_1.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_diversity/8mPpe8AL21A_96.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_diversity/8mPpe8AL21A_96.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_diversity/55yGmKc6WfE_46.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_diversity/55yGmKc6WfE_46.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_diversity/kEKzl6fub2w_63.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_diversity/kEKzl6fub2w_63.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/facetts_diversity/dYNc3P4jSt4_7_2.jpg" alt="" width="125" height="125"><br><audio controls="controls" style="width: 225px;"><source src="audio/facetts_diversity/dYNc3P4jSt4_7_2.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+
+
+			</tbody>
+		</table>
+		</div>
+</div>
+
+<div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded">
+	<h2 id="TextDiversity" style="text-align: center;">More Text-Driven Voice Samples</h2>
+	<p> </p>
+		<div class="table-responsive pt-3">
+			<table class="table table-hover pt-2" style="width: 100%; border-collapse: collapse;">
+			<thead>
+				<tr>
+					<th style="vertical-align : middle;text-align: center">Content Prompt</th>
+					<th style="vertical-align : middle;text-align: center">Speaker Identity Desciprion (Out of Domain)</th>
+					<th style="vertical-align : middle;text-align: center">UniSpeaker</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>What does you look like?</td>
+					<td>Kyle  is a barbarian with immense strength. His muscles are well-developed, and his body is covered with tribal tattoos and battle scars. He fights with a massive warhammer. His roar in battle is as terrifying as his weapon.</td>
+					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/texttts_diversity/1923_161975_000041_000002.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
+				</tr>
+				<tr>
+					<td>"Exchange" means funds in other cities made available by bankers' drafts on such places.</td>
+					<td>Lillian Stone is a professional dancer with a slender frame and well-defined muscles. Her long hair cascades over her shoulders like a waterfall, and her eyes always sparkle with confidence. Every step she takes exudes grace and poise, whether she is on stage or in daily life, she always manages to execute each movement to perfection.</td>
+					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/texttts_diversity/1046_133225_000028_000000.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
+				</tr>
+				<tr>
+					<td>Priscilla took Honors in Classics, and Phil in Mathematics. Stella obtained a good all round showing.</td>
+					<td>Allison is a compassionate doctor, always dressed in a clean white coat with a kind smile on her face. She constantly soothes her patients with a gentle voice and treats everyone in need of help with patience and care.</td>
+					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/texttts_diversity/112_123216_000033_000002.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
+				</tr>
+				<tr>
+					<td>From Thompson, that-.</td>
+					<td>Eilara  is a stealthy assassin known for her agility and precision. Dressed in black form-fitting attire, she can move silently within the shadows, excelling in the use of dual daggers. Her cold and calculated demeanor makes her a formidable adversary in the darkness.</td>
+					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/texttts_diversity/19_198_000016_000000.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
+				</tr>
+				<tr>
+					<td>"Nay, nay, not two," The other softly said.</td>
+					<td>Roderick is a noble knight clad in shining armor, embodying the spirit of chivalry. His sword is engraved with symbols of honor, and he courageously protects the innocent and defends justice. His bravery is renowned far and wide, and his shield bears the scars of numerous battles. </td>
+					<td style="vertical-align : middle;text-align:center;"><audio controls="controls" style="width: 225px;"><source src="audio/texttts_diversity/2137_155944_000008_000012.wav" autoplay/>Your browser does not support the audio element.</audio><br> </td>
+				</tr>
+
+			</tbody>
+		</table>
+		</div>
+</div>
+
+
+<div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded">
+	<h2 id="FaceText" style="text-align: center;">Joint Face and Text-driven Voice Samples</h2>
+	<p> </p>
+		<div class="table-responsive pt-3">
+			<table class="table table-hover pt-2" style="width: 100%; border-collapse: collapse;">
+			<thead>
+				<tr>
+					<th style="vertical-align : middle;text-align: center">Face Image</th>
+					<th style="vertical-align : middle;text-align: center">Speaker Identity Desciprion</th>
+					<th style="vertical-align : middle;text-align: center">Generated Speech</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/face_text/1L6lSFiV4xo|95.jpg" alt="" width="150" height="150"><br></td>
+					<td style="width: 50%; vertical-align: middle;"> Max Brown is an energetic athlete who always wears sports gear and often has sweat on his brow. He has a muscular build, moves with agility, and always has a bright smile on his face. He is enthusiastic about any challenge and enjoys helping others.</td>
+					<td style="text-align: center; vertical-align: middle;">
+						<input style="text-align: center" type="range" id="audioSlider7" min="0.1" max="0.9" step="0.1" value="0.7" oninput="updateGeneratedAudio(7)">
+						<span id="sliderValue7">0.7</span>
+						<br>
+						<audio id="generatedAudio7" controls="" style='width: 260px;'>Your browser does not support the audio element.</audio>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+		</div>
+</div>
+
+
+<div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded">
+	<h2 id="FaceAttribute" style="text-align: center;">Joint Face and Attribute-driven Voice Samples</h2>
+	<p> </p>
+		<div class="table-responsive pt-3">
+			<table class="table table-hover pt-2" style="width: 100%; border-collapse: collapse;">
+			<thead>
+				<tr>
+					<th style="vertical-align : middle;text-align: center">Face Image</th>
+					<th style="vertical-align : middle;text-align: center">Speaker Identity Desciprion</th>
+					<th style="vertical-align : middle;text-align: center">Generated Speech</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="vertical-align : middle;text-align:center;"><img src="audio/face_text/1L6lSFiV4xo|95.jpg" alt="" width="150" height="150"><br></td>
+					<td style="width: 50%; text-align: center; vertical-align: middle;"> I hope this voice becomes more magnetic.</td>
+					<td style="text-align: center; vertical-align: middle;">
+						<input style="text-align: center" type="range" id="audioSlider8" min="0.1" max="0.9" step="0.1" value="0.7" oninput="updateGeneratedAudio(8)">
+						<span id="sliderValue8">0.7</span>
+						<br>
+						<audio id="generatedAudio8" controls="" style='width: 260px;'>Your browser does not support the audio element.</audio>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+		</div>
+</div>
+
+
 
 <div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded">
 	<h2 style="text-align: center;">Disclaimer</h2>
@@ -500,6 +686,30 @@ Recently, the generated speech under zero-shot conditions has progressively appr
 		"audio/ave/p265_005|F_Slim_9.wav",
 		// Add more paths for source 6
         ],
+		[
+		"audio/face_text/1L6lSFiV4xo_95_8194_89390_000001_000009_1.wav",
+		"audio/face_text/1L6lSFiV4xo_95_8194_89390_000001_000009_2.wav",
+		"audio/face_text/1L6lSFiV4xo_95_8194_89390_000001_000009_3.wav",
+		"audio/face_text/1L6lSFiV4xo_95_8194_89390_000001_000009_4.wav",
+		"audio/face_text/1L6lSFiV4xo_95_8194_89390_000001_000009_5.wav",
+		"audio/face_text/1L6lSFiV4xo_95_8194_89390_000001_000009_6.wav",
+		"audio/face_text/1L6lSFiV4xo_95_8194_89390_000001_000009_7.wav",
+		"audio/face_text/1L6lSFiV4xo_95_8194_89390_000001_000009_8.wav",
+		"audio/face_text/1L6lSFiV4xo_95_8194_89390_000001_000009_9.wav",
+		// Add more paths for source 7
+		],
+		[
+		"audio/face_attribute/1L6lSFiV4xo_95_8194_89390_000001_000009_1.wav",
+		"audio/face_attribute/1L6lSFiV4xo_95_8194_89390_000001_000009_2.wav",
+		"audio/face_attribute/1L6lSFiV4xo_95_8194_89390_000001_000009_3.wav",
+		"audio/face_attribute/1L6lSFiV4xo_95_8194_89390_000001_000009_4.wav",
+		"audio/face_attribute/1L6lSFiV4xo_95_8194_89390_000001_000009_5.wav",
+		"audio/face_attribute/1L6lSFiV4xo_95_8194_89390_000001_000009_6.wav",
+		"audio/face_attribute/1L6lSFiV4xo_95_8194_89390_000001_000009_7.wav",
+		"audio/face_attribute/1L6lSFiV4xo_95_8194_89390_000001_000009_8.wav",
+		"audio/face_attribute/1L6lSFiV4xo_95_8194_89390_000001_000009_9.wav",
+		// Add more paths for source 8
+		],
     ];
 
 
@@ -510,6 +720,8 @@ Recently, the generated speech under zero-shot conditions has progressively appr
     updateGeneratedAudio(4);
 	updateGeneratedAudio(5);
     updateGeneratedAudio(6);
+	updateGeneratedAudio(7);
+	updateGeneratedAudio(8);
 
     // Function to update generated audio source and slider value
     function updateGeneratedAudio(groupIndex) {
